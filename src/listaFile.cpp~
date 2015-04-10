@@ -1,0 +1,50 @@
+ #include <listaFile.h>
+ #include <dirent.h>
+
+ /* Inclusione di iostream*/
+ #include <iostream>
+using namespace std;
+
+class listaFile{
+	static int contatore=0;
+	string Nomefile;
+	listaFile* next;
+	listaFile* prec;
+
+
+public :
+
+ listaFile(string& Nomefile,listaFile* prec=NULL,listaFile* next=NULL);
+string getNomefile();
+listaFile* getPrev();
+listaFile* getNext();
+};
+
+
+
+
+listaFile::listaFile(string& Nomefile,listaFile* prec=NULL,listaFile* next=NULL){
+	this.contatore++;
+	cout<<endl<<"Contatore oggetti:"<<contatore<<endl;
+	this.next=next;
+	this.Nomefile=Nomefile;
+	this.prec=prec;
+	cout<<endl<<"Creo un elemento della lista di nomi File"<<endl;
+	return this;
+}
+
+
+
+string listaFile::getNomefile(){
+	return this.Nomefile;
+}
+
+listaFile* listaFile::getPrev(){
+	if(this.prec==0) cout<<endl<<"Non possibile, siamo a inizio lista"<<endl;
+	return this.prec;
+}
+
+listaFile* listaFile::getNext(){
+	if(this.next==0) cout<<endl<<"Lista terminata"<<endl;
+	return this.next;
+}

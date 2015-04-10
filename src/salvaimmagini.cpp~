@@ -1,0 +1,92 @@
+ #include "opencv2/objdetect/objdetect.hpp"
+ #include "opencv2/highgui/highgui.hpp"
+ #include "opencv2/imgproc/imgproc.hpp"
+ #include "opencv2/core/core.hpp"
+ #include <iostream>
+
+using namespace cv;
+using namespace std;
+
+int main(){
+
+/*DICHIARAZIONI UTILI*/
+bool trovato;,
+Size boardSize(8,6);
+/*___________________*/
+
+
+	namedWindow("Stream da webcam ");
+
+	/* Apro la camera di default*/
+	VideoCapture cap(0);
+
+	if(!cap.isOpened()){
+		cout<<endl<<"Non sono riuscito ad accedere alla camera"<<endl;
+		return -1;
+	}
+
+	/* Dichiaro la variabile per l'immagine che andrò ad acquisire*/
+
+	Mat frame;
+	while(1){
+
+		/*Acquisisco il frame*/
+		cap >> frame;
+		imshow("Stream da webcam",frame);
+
+		char key;
+
+		/* */
+
+
+ trovato= findChessboardCorners(frame, boardSize, corners,
+        CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE
+        + CALIB_CB_FAST_CHECK);
+
+
+
+
+
+
+// DISEGNO IL PATTERN
+drawChessboardCorners(frame, boardSize, Mat(corners), trovato);
+
+
+		key=cvWaitKey(100/*millisecondi*/);
+
+		if (key==27/*ESCAPE*/){
+			cout<<endl<<"Operazione terminata dall'utente"<<endl;
+
+
+
+
+
+
+							}
+		if (key==97/*a*/){
+cout<<endl<<"Ok foto"<<endl;
+			imwrite("image.jpg",frame);
+          	break;
+          
+          }
+
+
+
+
+
+
+
+
+
+
+
+	}
+
+
+return(0);
+
+
+
+
+
+}
